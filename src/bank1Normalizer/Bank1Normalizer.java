@@ -5,6 +5,7 @@ import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
 import com.rabbitmq.client.QueueingConsumer;
+import dk.cphbusiness.connection.ConnectionCreator;
 import java.io.IOException;
 import org.w3c.dom.Document;
 import utilities.xml.xmlMapper;
@@ -19,14 +20,9 @@ public class Bank1Normalizer {
     private static final String OUT_QUEUE = "aggregator";
 
     public static void main(String[] args) throws IOException, InterruptedException {
-        ConnectionFactory factory = new ConnectionFactory();
-        factory.setUsername("nicklas");
-        factory.setPassword("cph");
-        factory.setHost("datdb.cphbusiness.dk");
-
-        Connection connection = factory.newConnection();
-        Channel channelIn = connection.createChannel();
-        Channel channelOut = connection.createChannel();
+        ConnectionCreator creator = ConnectionCreator.getInstance();
+        Channel channelIn = creator.createChannel();
+        Channel channelOut = creator.createChannel();
         channelIn.queueDeclare(IN_QUEUE, false, false, false, null);
         channelOut.queueDeclare(OUT_QUEUE, false, false, false, null);
 
