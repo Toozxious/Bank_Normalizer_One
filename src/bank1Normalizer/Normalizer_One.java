@@ -36,7 +36,10 @@ public class Normalizer_One {
             System.out.println("CorrelationID: " + delivery.getProperties().getCorrelationId());
             String message = translateMessage(delivery);
             BasicProperties prop = new BasicProperties().builder().correlationId(delivery.getProperties().getCorrelationId()).build();
+            System.out.println("Publish stuff?: " + message);
             channelOut.basicPublish("", OUT_QUEUE, prop, message.getBytes());
+            System.out.println("test er det koldt her ");
+            
         }
     }
 
