@@ -31,7 +31,6 @@ public class Normalizer_One {
 
         while (true) {
             QueueingConsumer.Delivery delivery = consumer.nextDelivery();
-            //channelIn.basicAck(delivery.getEnvelope().getDeliveryTag(), false);
             System.out.println(new String(delivery.getBody()));
             System.out.println("CorrelationID: " + delivery.getProperties().getCorrelationId());
             String message = translateMessage(delivery);
