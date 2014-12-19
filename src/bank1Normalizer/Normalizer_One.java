@@ -37,7 +37,6 @@ public class Normalizer_One {
             BasicProperties prop = new BasicProperties().builder().correlationId(delivery.getProperties().getCorrelationId()).build();
             System.out.println("Publish stuff?: " + message);
             channelOut.basicPublish("", OUT_QUEUE, prop, message.getBytes());
-            System.out.println("test er det koldt her ");
             
         }
     }
@@ -45,7 +44,7 @@ public class Normalizer_One {
     private static String translateMessage(QueueingConsumer.Delivery delivery) {
         String message = new String(delivery.getBody());
         Document doc = xmlMapper.getXMLDocument(message);
-        doc.getFirstChild().appendChild(doc.createElement("bankName")).appendChild(doc.createTextNode("Glorious XML Bank of the Republic of Antartica"));
+        doc.getFirstChild().appendChild(doc.createElement("bankName")).appendChild(doc.createTextNode("XML Bank"));
         return xmlMapper.getStringFromDoc(doc);
     }
 }
